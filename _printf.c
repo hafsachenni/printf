@@ -1,9 +1,7 @@
-#include "main.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
-#include <stdlib.h>
 
 /**
  * _printf - print function
@@ -14,13 +12,12 @@
 int _printf(const char *format, ...)
 {
 	va_list(args);
+	va_start(args, format);
 
 	int number = 0;
 
 	if (format == NULL)
 	return (-1);
-
-	va_start(args, format);
 
 
 	while (*format)
