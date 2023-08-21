@@ -14,59 +14,51 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int index = 0;
-	char c;
-	int d;
-	char *str = NULL;
-
-	va_start(args, format);
+	int i , j = 0;
+	char c, *s;
 
 	if (format == NULL)
 		return (-1);
 
-	while (*format)
-	{
-		if (*format == '%')
+	va_start(args, format[i]; i++)
+
+		for (i = 0;format[i]; i++)
 		{
-			format++;
-
-			if (*format == '\0')
-				break;
-
-			else if (*format == 'c')
+			if (format[i] == '%')
 			{
-				c = va_arg(args, int);
-				write(1, &c, 1);
-				index++;
+				i++;
+				switch (format[i])
+				{
+					case 'c';
+					c = va_arg(args, int);
+					pchar(c);
+					j++;
+					break;
+					case 's':
+					s = va_arg(args, char *);
+					if (s == NULL)
+						s = "(null)";
+					while (*s != '\0')
+					{
+						pchar(*s);
+						s++;
+						j++;
+					}
+					break;
+					case '%':
+					pchar('%');
+					j++;
+					break;
+					default:
+					return(-1);
+				}
 			}
-			else if (*format == 's')
+			else
 			{
-				str = va_arg(args, char *);
-				write(1, str, strlen(str));
-				index += strlen(str);
+				pchar(format[i]);
+				j++;
 			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				d = va_arg(args, int);
-				char temp_str[20];
-
-				sprintf(temp_str, "%d", d);
-				write(1, temp_str, strlen(str));
-				index += strlen(temp_str);
-			}
-			else if (*format == '%')
-			{
-				write(1, format, 1);
-				index++;
-			}
-			}
-		else
-		{
-			write(1, format, 1);
-			index++;
 		}
-		format++;
-	}
 	va_end(args);
-	return (index);
+	return (j);
 }
