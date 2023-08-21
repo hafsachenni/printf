@@ -7,11 +7,11 @@
  * _printf - print function
  * @format: format
  * Return: chars
-*/
+ */
 
 int _printf(const char *format, ...)
 {
-	va_list(args);
+	va_list args;
 	va_start(args, format);
 
 	int number = 0;
@@ -58,5 +58,11 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 
-	return (number);
+	return number;
+}
+
+int main()
+{
+	_printf("Hello, %s! This is a %c example.\n", "world", 'c');
+	return 0;
 }
