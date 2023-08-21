@@ -48,9 +48,11 @@ int _printf(const char *format, ...)
 			else if (*format == 'd' || *format == 'i')
 			{
 				d = va_arg(args, int);
-				sprintf(str, "%d", d);
-				write(1, str, strlen(str));
-				index += strlen(str);
+				char temp_str[20];
+
+				sprintf(temp_str, "%d", d);
+				write(1, temp_str, strlen(str));
+				index += strlen(temp_str);
 			}
 			else if (*format == '%')
 			{
