@@ -24,9 +24,7 @@ int _printf(const char *format, ...)
 	{
 	if (*format != '%')
 	{
-	format++;
-	if (*format == 'c')
-	{
+
 	write(1, format, 1);
 	number++;
 	}
@@ -45,10 +43,8 @@ int _printf(const char *format, ...)
 	else if (*format == 's')
 	{
 	char *b = va_arg(args, char *);
-	int c = 0;
+	int c = strlen(b);
 
-	while (b[c] != '\0')
-	c++;
 	write(1, b, c);
 	number += c;
 	}
