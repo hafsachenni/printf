@@ -29,7 +29,7 @@ int _printf(const char *format, ...)
 	format++;
 	if (*format == 'c')
 	{
-	write(1, &c, 1);
+	write(1, format, 1);
 	number++;
 	}
 	else
