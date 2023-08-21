@@ -1,8 +1,8 @@
 #include "main.h"
-#include <stdarg.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
+#include <stdarg.h>
 
 /**
  * _printf - print function
@@ -34,30 +34,30 @@ int _printf(const char *format, ...)
 	}
 	else
 	{
-		format++;
-		if (*format == '\0')
-			break;
-		else if (*format == 'c')
-		{
-			char a = va_arg(args, int);
+	format++;
+	if (*format == '\0')
+	break;
+	else if (*format == 'c')
+	{
+	char a = va_arg(args, int);
 
-			write(1, &a, 1);
-			number++;
-		}
-		else if (*format == 's')
-		{
-			char *b = va_arg(args, char *);
-			int c = 0;
+	write(1, &a, 1);
+	number++;
+	}
+	else if (*format == 's')
+	{
+	char *b = va_arg(args, char *);
+	int c = 0;
 
-			while (b[c] != '\0')
-				c++;
-			write(1, b, c);
-			number += c;
-		}
-		else if (*format == '%')
-		{
-			write(1, format, 1);
-			number++;
+	while (b[c] != '\0')
+	c++;
+	write(1, b, c);
+	number += c;
+	}
+	else if (*format == '%')
+	{
+	write(1, format, 1);
+	number++;
 		}
 	}
 	format++;
