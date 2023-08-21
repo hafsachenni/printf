@@ -12,15 +12,14 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int index = 0;
-	char c;
-	char *str;
+	va_list(args);
 
-	va_start(args, format);
+	int number = 0;
 
 	if (format == NULL)
 	return (-1);
+
+	va_start(args, format);
 
 
 	while (*format)
@@ -30,32 +29,40 @@ int _printf(const char *format, ...)
 	format++;
 	if (*format == 'c')
 	{
-	c = va_arg(args, int);
 	write(1, &c, 1);
-	index++;
-	}
-	else if (*format == 's')
-	{
-	str = va_arg(args, char *);
-	if (str == NULL)
-	str = " ";
-	write(1, str, strlen(str));
-	index += strlen(str);
-	}
-	else if (*format == '%')
-	{
-	write(1, format, 1);
-	index++;
-	}
+	number++;
 	}
 	else
 	{
-	write(1, format, 1);
-	index++;
+		format++;
+		if (*format == '\0')
+			break;
+		else if (*format == 'c')
+		{
+			char a = va_arg(args, int);
+
+			write(1, &a, 1);
+			number++;
+		}
+		else if (*format == 's')
+		{
+			char *b = va_arg(args, char *);
+			int c = 0;
+
+			while (b[c] != '\0')
+				c++;
+			write(1, b, c);
+			number += c;
+		}
+		else if (*format == '%')
+		{
+			write(1, format, 1);
+			number++;
+		}
 	}
 	format++;
 	}
 	va_end(args);
 
-	return (index);
+	return (number);
 }
