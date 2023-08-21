@@ -14,7 +14,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i , j = 0;
+	int i, j = 0;
 	char c, *s;
 
 	if (format == NULL)
@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format[i]; i++)
 
-		for (i = 0;format[i]; i++)
+		for (i = 0; format[i]; i++)
 		{
 			if (format[i] == '%')
 			{
@@ -50,7 +50,7 @@ int _printf(const char *format, ...)
 					j++;
 					break;
 					default:
-					return(-1);
+					return (-1);
 				}
 			}
 			else
