@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <string.h>
-#include <unistd.h>
+#include <stdio.h>
 
 /**
  * _printf - print function
@@ -14,8 +14,6 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int index = 0;
-	char c;
-	char *str;
 
 	va_start(args, format);
 
@@ -36,25 +34,32 @@ int _printf(const char *format, ...)
 			else if (*format == 'c')
 			{
 				c = va_arg(args, int);
-				write(1, &c, 1);
+				putchar(c);
 				index++;
-
 			}
 			else if (*format == 's')
 			{
 				str = va_arg(args, char *);
-				write(1, str, strlen(str));
-				index += strlen(str);
+				if (str != NULL)
+				{
+					while (*str)
+					{
+						putchar(*str);
+						index++;
+						str++;
+					}
+				}
 			}
-			else if (*format == '%')
+			else
 			{
-				write(1, format, 1);
-				index++;
+				putchar('%');
+				putchar(*format);
+				index += 2;
 			}
 		}
 		else
 		{
-			write(1, format, 1);
+			putchar(*format);
 			index++;
 		}
 		format++;
