@@ -33,5 +33,24 @@ int print_str(char *str)
 }
 
 
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
+/****printint****/
 
+/**
+ * print_int - convert int to string
+ * @number: int
+ * Return: 0
+ */
+
+int print_int(int number)
+{
+	char s[20];
+
+	sprintf(s, "%d", number);
+	write(1, s, strlen(s));
+
+	return (strlen(s));
+}
