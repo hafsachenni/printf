@@ -15,13 +15,10 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	int number;
+	int number = 0;
 
 	if (format == NULL)
 	return (-1);
-
-	number = 0;
-
 
 	while (*format)
 	{
@@ -45,6 +42,7 @@ int _printf(const char *format, ...)
 	}
 	else if (*format == 's')
 	{
+
 	char *b = va_arg(args, char *);
 	int c = strlen(b);
 
