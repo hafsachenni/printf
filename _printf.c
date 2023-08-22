@@ -6,19 +6,19 @@
 /**
  * _printf - print function
  * @format: format
- * Return: chars
+ * Return: numb of chars printed
  */
 
 int _printf(const char *format, ...)
 {
 	va_list args;
-
-	va_start(args, format);
-
 	int number = 0;
 
 	if (format == NULL)
 	return (-1);
+
+	va_start(args, format);
+
 
 	while (*format)
 	{
@@ -60,15 +60,4 @@ int _printf(const char *format, ...)
 	va_end(args);
 
 	return (number);
-}
-
-/**
- * main - entry point
- * Return: 0
- */
-
-int main(void)
-{
-	_printf("Hello, %s! This is a %c example.\n", "world", 'c');
-	return (0);
 }
