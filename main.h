@@ -4,11 +4,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include <stddef.h>
+#include <limits.h>
 #include <string.h>
 
-int pchar(char c);
 int _printf(const char *format, ...);
-int pint (int num);
-int funcHandle(va_list args, char han);
+int f_specifier(va_list args, char spec);
+int print_char(char c);
+int print_str(char *str);
+int print_int(char number);
+int print_uns(char num);
+int print_hexa(char num);
+
 #endif

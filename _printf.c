@@ -10,41 +10,45 @@
 
 int _printf(const char *format, ...)
 {
-	va_list(args);
-	int a = 0, s = 0, i;
+	va_list args;
+	int count = 0;
+	int num_printed;
+
+
+	va_start(args, format);
 
 	if (format == NULL)
 	{
 		va_end(args);
-		return (-1);
-	}
-	va_start(args, format);
+				return (-1);
+				}
 
-	while (format[a])
-	{
-		if (format[a] == '\0')
-			break;
+				while (*format)
+				{
+				if (*format == '%')
+				{
+					format++;
 
-		else if (format[a] == '%')
-		{
-			a++;
-			i = funcHandle(args, format[a]);
-			if (i == 0)
-			{
-				pchar('%');
-				pchar(format[a]);
-				i = 1;
-			}
-			s += i;
-		}
-		else
-		{
-			pchar(format[a]);
-			s++;
-		}
-		a++;
-	}
+				if (*format == '\0')
+				break;
 
-	va_end(args);
-	return (s);
+				num_printed = f_specifier(args, *format);
+				if (num_printed == 0)
+				{
+				format--;
+				print_char('%');
+				num_printed = 1;
+				}
+				count += num_printed;
+				}
+				else
+				{
+					count += print_char(*format);
+				}
+
+				format++;
+}
+
+va_end(args);
+return (count);
 }
