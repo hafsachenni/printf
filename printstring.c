@@ -1,13 +1,19 @@
 #include <string.h>
 #include <unistd.h>
 
-int print_str(char *str)
+/**
+ * put_str - print a string
+ * @str: str
+ * Return: num of char
+ */
+
+int put_str(char *str)
 {
-	int length;
+	int len = 0;
 
-	length = strlen(str);
+	if (str == NULL)
+		str = "";
 
-	write(1, str, length);
-	
-	return (length);
-}
+	while (*str)
+	{
+		if (*str == '
