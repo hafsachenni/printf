@@ -16,4 +16,28 @@ int put_str(char *str)
 
 	while (*str)
 	{
-		if (*str == '
+		if (*str == '\\')
+		{
+			str++;
+			if (*str == 'n')
+			{
+				write(1, "\n", 1);
+				str++;
+				len++;
+			}
+			else if (*str == 't')
+			{
+				write(1, "\t", 1);
+				str++;
+				len++;
+			}
+		}
+		else
+		{
+			write(1, str, 1);
+			str++;
+			len++;
+		}
+	}
+	return (len);
+}
