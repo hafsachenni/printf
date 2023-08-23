@@ -11,53 +11,42 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
 	int number = 0;
 
-	if (format == NULL)
-	return (-1);
+	va_list(args);
+	int op;
 
 	va_start(args, format);
 
 
+	if (format == NULL)
+	{
+		va_end(args);
+		return (-1);
+	}
 	while (*format)
 	{
-	if (*format != '%')
-	{
 
-	write(1, format, 1);
-	number++;
+	if (*format == '\0')
+	break;
+	else if (*format == '%')
+	{
+	format++;
+	op = con_func(args, *format);
+	if (op == 0)
+	{
+		format--;
+		print_c('%');
+		op = 1;
+	}
+	number += op;
 	}
 	else
 	{
-	format++;
-	if (*format == '\0')
-	break;
-	else if (*format == 'c')
-	{
-	char a = va_arg(args, int);
-
-	write(1, &a, 1);
-	number++;
-	}
-	else if (*format == 's')
-	{
-
-	char *b = va_arg(args, char *);
-	int c = strlen(b);
-
-	write(1, b, c);
-	number += c;
-	}
-	else if (*format == '%')
-	{
-	write(1, format, 1);
-	number++;
-		}
+		number += print_c(*format);
 	}
 	format++;
 	}
 	va_end(args);
-
 	return (number);
 }
