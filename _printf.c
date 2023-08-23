@@ -1,7 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
+#include "main.h"
 
 /**
  * _printf - print function
@@ -11,42 +8,41 @@
 
 int _printf(const char *format, ...)
 {
-	int number = 0;
-
 	va_list(args);
-	int op;
-
-	va_start(args, format);
-
+	int a = 0, s = 0, i;
 
 	if (format == NULL)
 	{
 		va_end(args);
 		return (-1);
 	}
-	while (*format)
-	{
+	va_start(args, format);
 
-	if (*format == '\0')
-	break;
-	else if (*format == '%')
+	while (format[a])
 	{
-	format++;
-	op = con_func(args, *format);
-	if (op == 0)
-	{
-		format--;
-		print_c('%');
-		op = 1;
+		if (format[a] == '\0')
+			break;
+
+		else if (format[a] == '%')
+		{
+			a++;
+			i = funcHandle(args, format[a]);
+			if (i == 0)
+			{
+				pchar('%');
+				pchar(format[a]);
+				i = 1;
+			}
+			s += i;
+		}
+		else
+		{
+			pchar(format[a]);
+			s++;
+		}
+		k++;
 	}
-	number += op;
-	}
-	else
-	{
-		number += print_c(*format);
-	}
-	format++;
-	}
+
 	va_end(args);
-	return (number);
+	return (s);
 }
