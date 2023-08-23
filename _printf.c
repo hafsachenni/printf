@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stddef.h>
+#include <stdarg.h>
 
 /**
  * _printf - print function
@@ -40,7 +42,7 @@ int _printf(const char *format, ...)
 			pchar(format[a]);
 			s++;
 		}
-		k++;
+		a++;
 	}
 
 	va_end(args);
